@@ -1,0 +1,35 @@
+private void Form1_Load(object sender, EventArgs e)
+        {
+            this.dataGridView1.Columns.Add("a", "a");
+            this.dataGridView1.Columns.Add("b", "b");
+            this.dataGridView1.Columns.Add("c", "c");
+
+            for (int i = 0; i < 4; i++)
+                this.dataGridView1.Rows.Add();
+
+            for (int i = 0; i < 3; i++)
+            {
+                Button[] btn = new Button[2];
+                btn[0] = new Button();
+                btn[0].Text = "one";
+                btn[1] = new Button();
+                btn[1].Text = "two";
+                this.dataGridView1.Controls.Add(btn[0]);
+                this.dataGridView1.Controls.Add(btn[1]);
+                Rectangle rect = this.dataGridView1.GetCellDisplayRectangle(2, i, false);
+                btn[0].Size = btn[1].Size = new Size(rect.Width / 2, rect.Height);
+                btn[0].Location = new Point(rect.Left, rect.Top);
+                btn[1].Location = new Point(rect.Left + btn[0].Width, rect.Top);
+                btn[0].Click += new EventHandler(CustomBtn_Click);
+                btn[1].Click += new EventHandler(CustomBtn_Click);
+            }
+        }
+        void CustomBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show((sender as Button).Text);
+        }
+		
+		//分页
+		select * from user where user_id > 0 limit 0,20;
+		select * from user where user_id > 17234 limit 0,20;
+		//依据 user_id的值来分页 ，怎样可以提升效率 
